@@ -38,9 +38,9 @@ class DictionaryIteration {
     // Question #4
     func nirvanaBestSeller() -> String {
         let bandName = "Nirvana"
-      
+        let band = bands[bandName] ?? ""
         // remove this return statement and replace it with what should be returned when you complete your implementation.
-        return String(format:"%@'s top-selling album was %@",bandName,bands[bandName])
+        return (bandName+"'s top-selling album was " + band + ".")
     }
     
     
@@ -48,7 +48,7 @@ class DictionaryIteration {
    
     func bestSellers() -> String {
         var  sentence = ""
-        bands.forEach{ sentence += (String(format:"%@'s top-selling album was %@\n",$0,$1) }
+        bands.forEach{ sentence += ($0+"'s top-selling album was "+$1+".") }
         return sentence
     }
     
@@ -56,9 +56,12 @@ class DictionaryIteration {
     
     // Question #6
    func typeOfDataStructure() -> String{
-       for (key,val) in bands {
-           return type(of: val)
-       }
+    var type = ""
+    for entry in bands.enumerated() {
+        type = String(describing: type(of:entry))
+        break
+    }
+    return (type.contains("key") && type.contains("value")) ? "Tuple" : type
    }
     
     
@@ -66,16 +69,26 @@ class DictionaryIteration {
     
     // Question #7
    
-    func typeOfDataStructureForSchool() -> String{
-        // let arr = ["A","B","C","D"]
-        // return arr[Int(arc4random_uniform(UInt32(arr.count)))]
-    }
+    func typeOfDataStructureForSchool() -> String{ return "B"}
     
     
     
     // Question #8
  
-    
+    func highestGrade(grades: [Int:String])->Int{
+        //bands.sorted(by: {(k1:Int,v1: String),(k2:Int,v2:String))-> Bool in return { v2 > v1 }})
+        //var vals = bands.mapValues{ val in return val}
+        var top = "F"
+        var key = -1
+        
+        for (k,val) in grades{
+            if val < top{
+                top = val
+                key = k
+            }
+        }
+        return key
+    }
     
     
 
